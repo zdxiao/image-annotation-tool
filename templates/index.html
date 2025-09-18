@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <title>图像标注工具</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </head>
+  <body>
+    <main class="wrapper">
+      <header class="header">
+        <h1>图像标注工具</h1>
+      </header>
+
+      <section id="task-setup" class="task-setup">
+        <div class="task-columns">
+          <div class="panel">
+            <h2>创建标注任务</h2>
+            <form id="create-task-form" class="create-form">
+              <label class="field">
+                <span>任务名称</span>
+                <input type="text" id="task-name" name="task-name" placeholder="例如：产品质检批次A" required>
+              </label>
+              <div class="field">
+                <span>选择图像文件夹</span>
+                <div class="directory-toolbar">
+                  <div class="root-input-group">
+                    <input type="text" id="directory-root-input" placeholder="输入或粘贴根目录路径">
+                    <button type="button" id="load-directory-root" class="secondary small">加载</button>
+                    <button type="button" id="up-directory-root" class="secondary small">上一级</button>
+                    <button type="button" id="reset-directory-root" class="secondary small">恢复默认</button>
+                  </div>
+                  <p class="hint">当前根目录：<span id="directory-root-display"></span></p>
+                </div>
+                <div id="directory-list" class="directory-list"></div>
+                <p id="directory-hint" class="hint"></p>
+              </div>
+              <p id="create-task-message" class="hint error"></p>
+              <button type="submit" id="create-task-button" class="primary">创建并开始</button>
+            </form>
+          </div>
+          <div class="panel">
+            <h2>继续未完成任务</h2>
+            <ul id="task-list" class="task-list"></ul>
+            <p id="task-hint" class="hint"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="annotation-view" class="annotation hidden">
+        <div class="annotation-header">
+          <button type="button" id="back-button" class="secondary">返回任务列表</button>
+          <h2 id="task-heading">任务</h2>
+        </div>
+        <div id="progress" class="progress">加载中…</div>
+        <section class="image-panel">
+          <div class="image-frame">
+            <img id="annotated-image" alt="正在加载图像" />
+          </div>
+          <p id="filename" class="filename"></p>
+        </section>
+        <section class="controls">
+          <div class="rating-buttons">
+            <button type="button" class="rating" data-rating="1">1 分</button>
+            <button type="button" class="rating" data-rating="2">2 分</button>
+            <button type="button" class="rating" data-rating="3">3 分</button>
+            <button type="button" class="rating" data-rating="4">4 分</button>
+            <button type="button" class="rating" data-rating="5">5 分</button>
+          </div>
+          <button type="button" id="next-button" class="next" disabled>保存评分并下一张</button>
+        </section>
+        <p id="status" class="status"></p>
+      </section>
+    </main>
+  </body>
+</html>
